@@ -162,33 +162,241 @@
 
             <div class="main">
                 <div class="container">
-                    <div class="post-wrap archive">
-                        
+                    <article class="post-wrap">
+                        <header class="post-header">
+                            <h1 class="post-title">
+                                Servlet-Notes
+                            </h1>
                             
-                                <h3>
-                                    2018
-                                </h3>
+                                <!--en-->
+                                <div class="post-meta en">
+                                    Author:
+                                    <a itemprop="author" rel="author" href="/">
+                                        Zachary's Home
+                                    </a>
+                                    <span class="post-time">
+                                Date: <a href="#">2020-12-02</a>
+                            </span>
+                                    <span class="post-readtime">Reading Time:<a
+                                    href="#">4.5
+                                    mins</a></span>
+                                    <span class="post-words">words:<a href="#">928</a></span>
+                                    
+                                            Views:
+                                            <span data-hk-page="current"> - </span>
+                                            
+                                </div>
+                                
+                        </header>
+                        
+                        <div class="post-content">
+                            <pre><code class="language-java">/**
+ * service方法专门用来处理请求和响应。
+ * Servlet接口实现
+ */
+@Override
+public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
+	System.out.println(&quot;Hello Servlet 被访问了。&quot;);
+}        
+
+//分发处理
+//向下转型从而能使用getMethod方法
+HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
+//获取方法String
+String method = httpServletRequest.getMethod();
+//分发操作
+if(&quot;GET&quot;.equals(method)){
+	System.out.println(method);
+}else if(&quot;POST&quot;.equals(method)){
+	System.out.println(method);
+}
+
+//通过继承方式实现Servlet程序
+//throws异常没加进去
+public class HelloServlet implements HttpServlet{
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp){
+		super.doGet(req, resp);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp){
+		super.doPost(req, resp);
+	}
+}
+
+//获取ServletConfig对象
+getServletConfig()
+//获取ServletContext对象
+ServletContext servletContext= getServletConfig().getServletContext();
+//获取context-parameter
+servletContext.getInitParameter(&quot;username&quot;);
+//获取当前工程路径
+servletContext.getContextPath();
+//获取当前工程物理上的绝对路径
+servletContext.getRealPath(&quot;/&quot;);
+
+//HttpServletRequest类对象的常用方法
+//HttpServletRequest req
+//获取请求的统一资源路径
+req.getRequestURI();
+//获取请求的统一资源定位符
+req.getRequestURL();
+//获取客户端IP
+req.getRemoteHost();
+//获取请求头
+req.getHeader(String key);
+//获取参数
+req.getParameter(String name);
+req.getParameterValues(String name);
+//设置字符集，注意这个设置要在最开始的地方使用
+req.setCharacterEncoding(&quot;UTF-8&quot;);
+</code></pre>
+<p><strong>请求转发的操作流程</strong></p>
+<pre><code class="language-java">//对于Servlet1而言
+String username = req.getParameter(&quot;username&quot;);
+username.sout;
+//设置域参数
+request.setAttribute(&quot;key1&quot;,&quot;value1&quot;);
+//获取转发路径并转发
+RequestDispatcher requestDispatcher = request.getRequestDispatcher(&quot;/contextServlet2&quot;);
+requestDispatcher.forward(request,response);
+//对于Servlet2而言
+//便可以获得request和response的信息，同时也可以获得域参数的信息。
+</code></pre>
+<p><strong>往客户端回传数据</strong></p>
+<pre><code class="language-java">//会同时设置服务器和客户端都使用UTF-8字符集，还设置了响应头。
+//此方法需要在获取流之前使用。
+response.setContentType(&quot;text/html; charset=UTF-8&quot;);
+//获取流
+PrintWriter print = response.getWriter();
+writer.write(&quot;response content.&quot;);
+</code></pre>
+<p><strong>请求重定向方法</strong></p>
+<pre><code class="language-java">//第一种方法
+response.setStatus(302);
+response.setHeader(&quot;Location&quot;, &quot;http://localhost:8080&quot;);
+//第二种方法（推荐使用）
+response.sendRedirect(&quot;http://localhost:8080&quot;)；
+</code></pre>
+<p><strong>ServletContext类对象的域数据</strong></p>
+<pre><code class="language-java">//对于Servlet1而言
+ServletContext servletContext = getServletContext();
+servletContext.setAttribute(key:&quot;username&quot;, value:&quot;czk&quot;);
+String v1 = servletContext.getAttribute(&quot;username&quot;); //&quot;czk&quot;
+//对于Servlet2而言
+ServletContext servletContext = getServletContext();
+String v2 = servletContext.getAttribute(&quot;username&quot;); //&quot;czk&quot;
+</code></pre>
+<p><strong>HttpServletRequest类对象的域数据</strong><br>
+<em>由实验结果可得，只有在一次请求之中，request中的域参数才是共享的，否则不共享。</em></p>
+<pre><code class="language-java">//对于Servlet1而言
+request.setAttribute(&quot;username&quot;, &quot;czk&quot;);
+String v1 = request.getAttribute(&quot;username&quot;); //&quot;czk&quot;
+//对于Servlet2而言
+request.getAttribute(&quot;username&quot;); //null
+</code></pre>
+<hr>
+<pre><code class="language-html">&lt;head&gt;
+	&lt;base href=&quot;http://localhost:8080/01_web/a/b/&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;form action=&quot;http://localhost:8080/01_web/hello&quot; method=&quot;get&quot;&gt;
+        用户名：&lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;&lt;br/&gt;
+        密码：&lt;input type=&quot;password&quot; name=&quot;password&quot;&gt;&lt;br/&gt;
+        兴趣爱好：&lt;input type=&quot;checkbox&quot; name=&quot;hobby&quot; value=&quot;java&quot;&gt;Java&lt;br/&gt;
+        &lt;input type=&quot;submit&quot;&gt;
+        &lt;a href=&quot;a/b/c.html&quot;&gt;超链接&lt;/a&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+</code></pre>
+<hr>
+<pre><code class="language-xml">&lt;!-- servlet标签给Tomcat服务器配置Servlet程序 --&gt;
+&lt;servlet&gt;
+	&lt;!-- 程序别名 --&gt;
+	&lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;
+	&lt;!-- 程序全类名 --&gt;
+	&lt;servlet-class&gt;com.chenzk.learn.HelloServlet&lt;/servlet-class&gt;
+
+	&lt;!-- 初始化参数 --&gt;
+	&lt;init-param&gt;
+		&lt;param-name&gt;username&lt;/param-name&gt;
+		&lt;param-value&gt;root&lt;/param-value&gt;
+	&lt;/init-param&gt;
+&lt;/servlet&gt;
+
+&lt;!-- servlet-mapping标签给servlet程序配置访问地址 --&gt;
+&lt;servlet-mapping&gt;
+	&lt;!-- 作用：告诉服务器，我当前配置的地址给哪一个Servlet程序使用 --&gt;
+	&lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;
+	&lt;!--
+    		/ 斜杠在服务器解析时，表示地址为 http://ip:port/工程路径 &lt;br/&gt;
+    		/hello 表示地址为 http://ip:port/工程路径/hello        &lt;br/&gt;
+ 	--&gt;
+	&lt;url-pattern&gt;/hello&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;    
+</code></pre>
+
+                        </div>
+                        
                                 
                                     
+                                        <!--en-->
+                                        <section class="post-copyright en">
+                                            <p class="copyright-item">
+                                                <span>Author:</span>
+                                                <span>Zachary's Home</span>
+                                            </p>
 
-                                        <article class="archive-item">
-                                            <a class="archive-item-link" href="https://zacharyzekaichen.github.io/post/hello-gridea/">
-                                                Hello Gridea
-                                            </a>
-                                            <span class="archive-item-date">2018-12-12 </span>
-                                        </article>
+                                            <p class="copyright-item">
+                                                <span>Permalink:</span>
+                                                <span><a href="https://zacharyzekaichen.github.io/post/servlet-notes/">https://zacharyzekaichen.github.io/post/servlet-notes/</a></span>
+                                            </p>
+
+                                            <p class="copyright-item">
+                                                <span>License:</span>
+                                                <span>MIT License</span>
+                                            </p>
+                                        </section>
                                         
-                                            
                                                 
-                    </div>
-                    <div class="pagination-container">
-                        
-                                                
+                                                    
+                                                        <!-- Share-->
+                                                        <span style="margin-right:15px">
+                                                    <i class="post-share"></i>
+                                                    <span>Share:</span>
+                                                        <a title="QR Code" target="_blank" href="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://zacharyzekaichen.github.io/post/servlet-notes/"><i class="fa fa-qrcode"></i></a>
+                                                        <a title="QQ" target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://zacharyzekaichen.github.io/post/servlet-notes/&sharesource=qzone&title=Servlet-Notes&pics=https://zacharyzekaichen.github.io/images/avatar.png?v=1606920415764&summary="><i class="fa fa-qq"></i></a>
+                                                        <a title="Weibo" target="_blank" href="https://service.weibo.com/share/share.php?url=https://zacharyzekaichen.github.io/post/servlet-notes/&sharesource=weibo&title=Servlet-Notes + " - " + &pic="https://zacharyzekaichen.github.io/images/avatar.png?v=1606920415764 "><i class="fa fa-weibo "></i></a>
                                                         
+                                                                </span>
+                                                                <!--en-->
+                                                                <section class="post-tags en ">
+                                                                    <div>
+                                                                        <span>Tag(s):</span>
+                                                                        <span class="tag ">
+                        
+                                                            </span>
+                                                                    </div>
+                                                                    <div>
+                                                                        <a href="javascript:window.history.back();">back</a>
+                                                                        <span>&dot;</span>
+                                                                        <a href="#">home</a>
+                                                                    </div>
+                                                                </section>
                                                                 
-                    </div>
+                                                                                <!---->
+                                                                                <section class="post-nav">
+                                                                                    
+                                                                                            
+                                                                                </section>
+                    </article>
                 </div>
+                
+                                            
             </div>
+    </div>
+    </div>
     </div>
     
     <div id="player"></div>
@@ -271,5 +479,8 @@
                 </script>
         </div>
 </body>
+<script>
+    scroll();
+</script>
 
 </html>

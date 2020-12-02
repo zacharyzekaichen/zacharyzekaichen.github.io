@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zacharyzekaichen.github.io</id>
     <title>Zachary&apos;s Home</title>
-    <updated>2020-12-02T14:37:50.568Z</updated>
+    <updated>2020-12-02T14:47:23.591Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zacharyzekaichen.github.io"/>
     <link rel="self" href="https://zacharyzekaichen.github.io/atom.xml"/>
@@ -11,35 +11,157 @@
     <icon>https://zacharyzekaichen.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Zachary&apos;s Home</rights>
     <entry>
-        <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://zacharyzekaichen.github.io/post/hello-gridea/</id>
-        <link href="https://zacharyzekaichen.github.io/post/hello-gridea/">
+        <title type="html"><![CDATA[Servlet-Notes]]></title>
+        <id>https://zacharyzekaichen.github.io/post/servlet-notes/</id>
+        <link href="https://zacharyzekaichen.github.io/post/servlet-notes/">
         </link>
-        <updated>2018-12-11T16:00:00.000Z</updated>
-        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
+        <updated>2020-12-02T14:43:32.000Z</updated>
+        <content type="html"><![CDATA[<pre><code class="language-java">/**
+ * service方法专门用来处理请求和响应。
+ * Servlet接口实现
+ */
+@Override
+public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
+	System.out.println(&quot;Hello Servlet 被访问了。&quot;);
+}        
+
+//分发处理
+//向下转型从而能使用getMethod方法
+HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
+//获取方法String
+String method = httpServletRequest.getMethod();
+//分发操作
+if(&quot;GET&quot;.equals(method)){
+	System.out.println(method);
+}else if(&quot;POST&quot;.equals(method)){
+	System.out.println(method);
+}
+
+//通过继承方式实现Servlet程序
+//throws异常没加进去
+public class HelloServlet implements HttpServlet{
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp){
+		super.doGet(req, resp);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp){
+		super.doPost(req, resp);
+	}
+}
+
+//获取ServletConfig对象
+getServletConfig()
+//获取ServletContext对象
+ServletContext servletContext= getServletConfig().getServletContext();
+//获取context-parameter
+servletContext.getInitParameter(&quot;username&quot;);
+//获取当前工程路径
+servletContext.getContextPath();
+//获取当前工程物理上的绝对路径
+servletContext.getRealPath(&quot;/&quot;);
+
+//HttpServletRequest类对象的常用方法
+//HttpServletRequest req
+//获取请求的统一资源路径
+req.getRequestURI();
+//获取请求的统一资源定位符
+req.getRequestURL();
+//获取客户端IP
+req.getRemoteHost();
+//获取请求头
+req.getHeader(String key);
+//获取参数
+req.getParameter(String name);
+req.getParameterValues(String name);
+//设置字符集，注意这个设置要在最开始的地方使用
+req.setCharacterEncoding(&quot;UTF-8&quot;);
+</code></pre>
+<p><strong>请求转发的操作流程</strong></p>
+<pre><code class="language-java">//对于Servlet1而言
+String username = req.getParameter(&quot;username&quot;);
+username.sout;
+//设置域参数
+request.setAttribute(&quot;key1&quot;,&quot;value1&quot;);
+//获取转发路径并转发
+RequestDispatcher requestDispatcher = request.getRequestDispatcher(&quot;/contextServlet2&quot;);
+requestDispatcher.forward(request,response);
+//对于Servlet2而言
+//便可以获得request和response的信息，同时也可以获得域参数的信息。
+</code></pre>
+<p><strong>往客户端回传数据</strong></p>
+<pre><code class="language-java">//会同时设置服务器和客户端都使用UTF-8字符集，还设置了响应头。
+//此方法需要在获取流之前使用。
+response.setContentType(&quot;text/html; charset=UTF-8&quot;);
+//获取流
+PrintWriter print = response.getWriter();
+writer.write(&quot;response content.&quot;);
+</code></pre>
+<p><strong>请求重定向方法</strong></p>
+<pre><code class="language-java">//第一种方法
+response.setStatus(302);
+response.setHeader(&quot;Location&quot;, &quot;http://localhost:8080&quot;);
+//第二种方法（推荐使用）
+response.sendRedirect(&quot;http://localhost:8080&quot;)；
+</code></pre>
+<p><strong>ServletContext类对象的域数据</strong></p>
+<pre><code class="language-java">//对于Servlet1而言
+ServletContext servletContext = getServletContext();
+servletContext.setAttribute(key:&quot;username&quot;, value:&quot;czk&quot;);
+String v1 = servletContext.getAttribute(&quot;username&quot;); //&quot;czk&quot;
+//对于Servlet2而言
+ServletContext servletContext = getServletContext();
+String v2 = servletContext.getAttribute(&quot;username&quot;); //&quot;czk&quot;
+</code></pre>
+<p><strong>HttpServletRequest类对象的域数据</strong><br>
+<em>由实验结果可得，只有在一次请求之中，request中的域参数才是共享的，否则不共享。</em></p>
+<pre><code class="language-java">//对于Servlet1而言
+request.setAttribute(&quot;username&quot;, &quot;czk&quot;);
+String v1 = request.getAttribute(&quot;username&quot;); //&quot;czk&quot;
+//对于Servlet2而言
+request.getAttribute(&quot;username&quot;); //null
+</code></pre>
+<hr>
+<pre><code class="language-html">&lt;head&gt;
+	&lt;base href=&quot;http://localhost:8080/01_web/a/b/&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;form action=&quot;http://localhost:8080/01_web/hello&quot; method=&quot;get&quot;&gt;
+        用户名：&lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;&lt;br/&gt;
+        密码：&lt;input type=&quot;password&quot; name=&quot;password&quot;&gt;&lt;br/&gt;
+        兴趣爱好：&lt;input type=&quot;checkbox&quot; name=&quot;hobby&quot; value=&quot;java&quot;&gt;Java&lt;br/&gt;
+        &lt;input type=&quot;submit&quot;&gt;
+        &lt;a href=&quot;a/b/c.html&quot;&gt;超链接&lt;/a&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+</code></pre>
+<hr>
+<pre><code class="language-xml">&lt;!-- servlet标签给Tomcat服务器配置Servlet程序 --&gt;
+&lt;servlet&gt;
+	&lt;!-- 程序别名 --&gt;
+	&lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;
+	&lt;!-- 程序全类名 --&gt;
+	&lt;servlet-class&gt;com.chenzk.learn.HelloServlet&lt;/servlet-class&gt;
+
+	&lt;!-- 初始化参数 --&gt;
+	&lt;init-param&gt;
+		&lt;param-name&gt;username&lt;/param-name&gt;
+		&lt;param-value&gt;root&lt;/param-value&gt;
+	&lt;/init-param&gt;
+&lt;/servlet&gt;
+
+&lt;!-- servlet-mapping标签给servlet程序配置访问地址 --&gt;
+&lt;servlet-mapping&gt;
+	&lt;!-- 作用：告诉服务器，我当前配置的地址给哪一个Servlet程序使用 --&gt;
+	&lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;
+	&lt;!--
+    		/ 斜杠在服务器解析时，表示地址为 http://ip:port/工程路径 &lt;br/&gt;
+    		/hello 表示地址为 http://ip:port/工程路径/hello        &lt;br/&gt;
+ 	--&gt;
+	&lt;url-pattern&gt;/hello&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;    
+</code></pre>
 ]]></content>
     </entry>
 </feed>
