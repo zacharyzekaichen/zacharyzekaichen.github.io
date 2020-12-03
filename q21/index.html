@@ -161,43 +161,188 @@
 </script>
 
             <div class="main">
-                <div class="post-wrap archive">
-                    
-                        
-                            <h3>
-                                2020
-                            </h3>
+                <div class="container">
+                    <article class="post-wrap">
+                        <header class="post-header">
+                            <h1 class="post-title">
+                                Q21
+                            </h1>
                             
-                                
-                                    <article class="archive-item">
-                                        <a class="archive-item-link" href="https://zacharyzekaichen.github.io/q21/">
-                                            Q21
-                                        </a><span class="archive-item-date">2020-12-03 </span></article>
+                                <!--en-->
+                                <div class="post-meta en">
+                                    Author:
+                                    <a itemprop="author" rel="author" href="/">
+                                        Zachary's Home
+                                    </a>
+                                    <span class="post-time">
+                                Date: <a href="#">2020-12-03</a>
+                            </span>
+                                    <span class="post-readtime">Reading Time:<a
+                                    href="#">1.6
+                                    mins</a></span>
+                                    <span class="post-words">words:<a href="#">321</a></span>
                                     
-                                        
+                                        <span class="post-category">
+                                Category:
                                 
-                                    <article class="archive-item">
-                                        <a class="archive-item-link" href="https://zacharyzekaichen.github.io/jvm/">
-                                            JVM
-                                        </a><span class="archive-item-date">2020-12-02 </span></article>
-                                    
-                                        
+                                <a href="https://zacharyzekaichen.github.io/tag/oOZ_Ye0nF/">Algorithm</a>
                                 
-                                    <article class="archive-item">
-                                        <a class="archive-item-link" href="https://zacharyzekaichen.github.io/servlet-notes/">
-                                            Servlet-Notes
-                                        </a><span class="archive-item-date">2020-12-02 </span></article>
-                                    
+                                <a href="https://zacharyzekaichen.github.io/tag/twUiAisKql/">Java</a>
+                                
+                            </span>
                                         
+                                            Views:
+                                            <span data-hk-page="current"> - </span>
                                             
-                </div>
-                <div class="pagination-container">
-                    
-                                            
+                                </div>
+                                
+                        </header>
+                        
+                        <div class="post-content">
+                            <p><mark>方法一</mark>：迭代</p>
+<pre><code class="language-java">public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        if(l1 == null) {return (l2 == null)? null : l2;}
+        if(l2 == null) {return (l1 == null)? null : l1;}
+
+        ListNode nodeTemp1 = l1;
+        ListNode nodeTemp2 = l2;
+        //注意：头不能动！！！
+        ListNode newList = new ListNode();
+        ListNode nodeTemp = newList;
+
+        while(true) {
+            //退出while循环条件
+            if(nodeTemp1 == null || nodeTemp2 == null) {
+                nodeTemp.next = (nodeTemp1 == null)? nodeTemp2 : nodeTemp1;
+                break;
+            }
+
+            if(nodeTemp1.val == nodeTemp2.val) {
+                //相等不进行判断也是可以的，融入到下面两个里面
+                nodeTemp.next = nodeTemp1;
+                nodeTemp1 = nodeTemp1.next;
+                nodeTemp = nodeTemp.next;
+                nodeTemp.next = nodeTemp2;
+                nodeTemp2 = nodeTemp2.next;
+                nodeTemp = nodeTemp.next;
+            }else if(nodeTemp1.val &gt; nodeTemp2.val) {
+                nodeTemp.next = nodeTemp2;
+                nodeTemp2 = nodeTemp2.next;
+                nodeTemp = nodeTemp.next;
+            }else if(nodeTemp1.val &lt; nodeTemp2.val) {
+                nodeTemp.next = nodeTemp1;
+                nodeTemp1 = nodeTemp1.next;
+                nodeTemp = nodeTemp.next;
+            }
+            //需要注意的是，无论怎么样，新建链表的指针都是要往后面挪动的。
+        }
+
+        //注意不要将头节点返回
+        return newList.next;
+    }
+</code></pre>
+<p><strong>注意点：在单向链表中，头是不能动的，不然找不回来原来的链表了。</strong></p>
+<p>错误操作示范：<mark>问题原因，对值传递的理解</mark></p>
+<pre><code class="language-java">nodeTemp.next = nodeTemp1;
+nodeTemp = nodeTemp.next;
+//这个时候nodeTemp == nodeTemp1
+//接下来的操作：相当于nodeTemp1.next = nodeTemp2
+//于是，nodeTemp1后面的数据丢失
+nodeTemp.next = nodeTemp2;
+nodeTemp = nodeTemp.next;
+nodeTemp1 = nodeTemp1.next;
+nodeTemp2 = nodeTemp2.next;
+</code></pre>
+<p><mark>方法二</mark>：递归</p>
+<pre><code class="language-java">public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+    if (l1 == null) {
+        return l2;
+    } else if (l2 == null) {
+        return l1;
+    } else if (l1.val &lt; l2.val) {
+        l1.next = mergeTwoLists(l1.next, l2);
+        return l1;
+    } else {
+        l2.next = mergeTwoLists(l1, l2.next);
+        return l2;
+    }
+}
+</code></pre>
+
+                        </div>
+                        
+                                
+                                    
+                                        <!--en-->
+                                        <section class="post-copyright en">
+                                            <p class="copyright-item">
+                                                <span>Author:</span>
+                                                <span>Zachary's Home</span>
+                                            </p>
+
+                                            <p class="copyright-item">
+                                                <span>Permalink:</span>
+                                                <span><a href="https://zacharyzekaichen.github.io/q21/">https://zacharyzekaichen.github.io/q21/</a></span>
+                                            </p>
+
+                                            <p class="copyright-item">
+                                                <span>License:</span>
+                                                <span>MIT License</span>
+                                            </p>
+                                        </section>
+                                        
+                                                
                                                     
-                                                            
+                                                        <!-- Share-->
+                                                        <span style="margin-right:15px">
+                                                    <i class="post-share"></i>
+                                                    <span>Share:</span>
+                                                        <a title="QR Code" target="_blank" href="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://zacharyzekaichen.github.io/q21/"><i class="fa fa-qrcode"></i></a>
+                                                        <a title="QQ" target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://zacharyzekaichen.github.io/q21/&sharesource=qzone&title=Q21&pics=https://zacharyzekaichen.github.io/images/avatar.png?v=1607009673500&summary="><i class="fa fa-qq"></i></a>
+                                                        <a title="Weibo" target="_blank" href="https://service.weibo.com/share/share.php?url=https://zacharyzekaichen.github.io/q21/&sharesource=weibo&title=Q21 + " - " + &pic="https://zacharyzekaichen.github.io/images/avatar.png?v=1607009673500 "><i class="fa fa-weibo "></i></a>
+                                                        
+                                                                </span>
+                                                                <!--en-->
+                                                                <section class="post-tags en ">
+                                                                    <div>
+                                                                        <span>Tag(s):</span>
+                                                                        <span class="tag ">
+                        
+                        
+                        <a href="https://zacharyzekaichen.github.io/tag/oOZ_Ye0nF/">#
+                                                Algorithm
+                                                    </a>
+                                                    
+                        <a href="https://zacharyzekaichen.github.io/tag/twUiAisKql/">#
+                                                Java
+                                                    </a>
+                                                    
+                                                        
+                                                            </span>
+                                                                    </div>
+                                                                    <div>
+                                                                        <a href="javascript:window.history.back();">back</a>
+                                                                        <span>&dot;</span>
+                                                                        <a href="#">home</a>
+                                                                    </div>
+                                                                </section>
+                                                                
+                                                                                <!---->
+                                                                                <section class="post-nav">
+                                                                                    
+                                                                                            
+                                                                                                <a class="next" rel="next" href="https://zacharyzekaichen.github.io/jvm/">
+                                                                                                    JVM
+                                                                                                </a>
+                                                                                                
+                                                                                </section>
+                    </article>
                 </div>
+                
+                                            
             </div>
+    </div>
+    </div>
     </div>
     
     <div id="player"></div>
@@ -280,5 +425,8 @@
                 </script>
         </div>
 </body>
+<script>
+    scroll();
+</script>
 
 </html>

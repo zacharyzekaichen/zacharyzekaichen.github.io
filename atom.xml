@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zacharyzekaichen.github.io</id>
     <title>Zachary&apos;s Home</title>
-    <updated>2020-12-02T14:47:23.591Z</updated>
+    <updated>2020-12-03T15:34:53.154Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zacharyzekaichen.github.io"/>
     <link rel="self" href="https://zacharyzekaichen.github.io/atom.xml"/>
@@ -11,9 +11,135 @@
     <icon>https://zacharyzekaichen.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Zachary&apos;s Home</rights>
     <entry>
+        <title type="html"><![CDATA[Q21]]></title>
+        <id>https://zacharyzekaichen.github.io/q21/</id>
+        <link href="https://zacharyzekaichen.github.io/q21/">
+        </link>
+        <updated>2020-12-03T01:57:33.000Z</updated>
+        <content type="html"><![CDATA[<p><mark>方法一</mark>：迭代</p>
+<pre><code class="language-java">public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        if(l1 == null) {return (l2 == null)? null : l2;}
+        if(l2 == null) {return (l1 == null)? null : l1;}
+
+        ListNode nodeTemp1 = l1;
+        ListNode nodeTemp2 = l2;
+        //注意：头不能动！！！
+        ListNode newList = new ListNode();
+        ListNode nodeTemp = newList;
+
+        while(true) {
+            //退出while循环条件
+            if(nodeTemp1 == null || nodeTemp2 == null) {
+                nodeTemp.next = (nodeTemp1 == null)? nodeTemp2 : nodeTemp1;
+                break;
+            }
+
+            if(nodeTemp1.val == nodeTemp2.val) {
+                //相等不进行判断也是可以的，融入到下面两个里面
+                nodeTemp.next = nodeTemp1;
+                nodeTemp1 = nodeTemp1.next;
+                nodeTemp = nodeTemp.next;
+                nodeTemp.next = nodeTemp2;
+                nodeTemp2 = nodeTemp2.next;
+                nodeTemp = nodeTemp.next;
+            }else if(nodeTemp1.val &gt; nodeTemp2.val) {
+                nodeTemp.next = nodeTemp2;
+                nodeTemp2 = nodeTemp2.next;
+                nodeTemp = nodeTemp.next;
+            }else if(nodeTemp1.val &lt; nodeTemp2.val) {
+                nodeTemp.next = nodeTemp1;
+                nodeTemp1 = nodeTemp1.next;
+                nodeTemp = nodeTemp.next;
+            }
+            //需要注意的是，无论怎么样，新建链表的指针都是要往后面挪动的。
+        }
+
+        //注意不要将头节点返回
+        return newList.next;
+    }
+</code></pre>
+<p><strong>注意点：在单向链表中，头是不能动的，不然找不回来原来的链表了。</strong></p>
+<p>错误操作示范：<mark>问题原因，对值传递的理解</mark></p>
+<pre><code class="language-java">nodeTemp.next = nodeTemp1;
+nodeTemp = nodeTemp.next;
+//这个时候nodeTemp == nodeTemp1
+//接下来的操作：相当于nodeTemp1.next = nodeTemp2
+//于是，nodeTemp1后面的数据丢失
+nodeTemp.next = nodeTemp2;
+nodeTemp = nodeTemp.next;
+nodeTemp1 = nodeTemp1.next;
+nodeTemp2 = nodeTemp2.next;
+</code></pre>
+<p><mark>方法二</mark>：递归</p>
+<pre><code class="language-java">public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+    if (l1 == null) {
+        return l2;
+    } else if (l2 == null) {
+        return l1;
+    } else if (l1.val &lt; l2.val) {
+        l1.next = mergeTwoLists(l1.next, l2);
+        return l1;
+    } else {
+        l2.next = mergeTwoLists(l1, l2.next);
+        return l2;
+    }
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[JVM]]></title>
+        <id>https://zacharyzekaichen.github.io/jvm/</id>
+        <link href="https://zacharyzekaichen.github.io/jvm/">
+        </link>
+        <updated>2020-12-02T15:02:15.000Z</updated>
+        <content type="html"><![CDATA[<p>[toc]</p>
+<h3 id="双亲委派机制">双亲委派机制</h3>
+<h4 id="优势">优势</h4>
+<ul>
+<li>避免类的重复加载</li>
+<li>保护线程安全，防止核心API被随意篡改
+<ul>
+<li>java.lang.String</li>
+<li>java.lang.ShkStart</li>
+</ul>
+</li>
+</ul>
+<h3 id="沙箱安全机制">沙箱安全机制</h3>
+<p>保证对java核心源代码的保护。</p>
+<h3 id="其他">其他</h3>
+<h4 id="jvm中表示两个class对象是否为同一个类存在的两个必要条件">JVM中表示两个class对象是否为同一个类存在的两个必要条件</h4>
+<ul>
+<li>类的完整类名必须一样，包括包名。</li>
+<li>加载的ClassLoader必须相同。</li>
+</ul>
+<p><mark>如果一个类型是由用户类加载器加载的，那么JVM会将这个类加载器的一个引用作为类型信息的一部分保存在<strong>方法区</strong>中。</mark></p>
+<h4 id="主动使用和被动使用">主动使用和被动使用</h4>
+<p>两者的区别是：类的被动使用不会导致<mark>类的初始化</mark>。</p>
+<h2 id="运行时数据区概述及线程">运行时数据区概述及线程</h2>
+<h3 id="简单介绍">简单介绍</h3>
+<p>JVM内存布局规定了Java在运行过程中内存申请、分配、管理的策略，保证了JVM的高效稳定运行。<mark>不同的JVM对于内存的划分方式和管理机制存在着部分差异。</mark></p>
+<figure data-type="image" tabindex="1"><img src="C:%5CUsers%5Czacha%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201203230740457.png" alt="image-20201203230740457" loading="lazy"></figure>
+<p>Java虚拟机的启动和退出与一个进程相对应。</p>
+<p>重点优化的是堆空间[95%]和方法区（元空间）[5%]。</p>
+<p>一个JVM的内存区域对应一个Runtime类的对象。</p>
+<h3 id="线程">线程</h3>
+<p>线程是一个程序里的运行单元。</p>
+<p>在Hotspot JVM里，<mark>每个线程都与操作系统的本地线程直接映射</mark>。当一个Java线程准备好执行以后，此时一个操作系统的本地线程也同时创建，调用Java线程中的run()方法。Java线程执行终止后，本地线程也会回收。</p>
+<p>后台系统线程：</p>
+<figure data-type="image" tabindex="2"><img src="C:%5CUsers%5Czacha%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201203232037475.png" alt="image-20201203232037475" loading="lazy"></figure>
+<h3 id="程序计数器pc寄存器">程序计数器（PC寄存器）</h3>
+<h4 id="介绍">介绍</h4>
+<p><mark>JVM中的PC寄存器是对物理PC寄存器的一种抽象模拟。<mark>也称为</mark>程序钩子</mark>。</p>
+<p>作用：用来存储指向下一条指令的地址，也即将要执行的指令代码。由执行引擎读取下一条指令。</p>
+<p>任何时间一个线程都只有一个方法在执行，也就是所谓的<mark>当前方法</mark>。程序计数器会存储当前线程正在执行的Java方法的JVM指令地址；或者，如果是在执行native方法（本地方法区），则是未指定值（undefined）。</p>
+<p><mark>它是唯一一个Java虚拟机规范中没有规定任何OutOfMemoryError情况的区域。<strong>其实是，既没有OOM，也没有GC。</strong></mark></p>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[Servlet-Notes]]></title>
-        <id>https://zacharyzekaichen.github.io/post/servlet-notes/</id>
-        <link href="https://zacharyzekaichen.github.io/post/servlet-notes/">
+        <id>https://zacharyzekaichen.github.io/servlet-notes/</id>
+        <link href="https://zacharyzekaichen.github.io/servlet-notes/">
         </link>
         <updated>2020-12-02T14:43:32.000Z</updated>
         <content type="html"><![CDATA[<pre><code class="language-java">/**
