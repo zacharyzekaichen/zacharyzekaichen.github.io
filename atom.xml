@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zacharyzekaichen.github.io</id>
     <title>Zachary&apos;s Home</title>
-    <updated>2020-12-08T08:34:47.811Z</updated>
+    <updated>2020-12-17T04:41:41.993Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zacharyzekaichen.github.io"/>
     <link rel="self" href="https://zacharyzekaichen.github.io/atom.xml"/>
@@ -11,80 +11,26 @@
     <icon>https://zacharyzekaichen.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Zachary&apos;s Home</rights>
     <entry>
-        <title type="html"><![CDATA[Q21]]></title>
-        <id>https://zacharyzekaichen.github.io/q21/</id>
-        <link href="https://zacharyzekaichen.github.io/q21/">
+        <title type="html"><![CDATA[Leetcode归类与索引]]></title>
+        <id>https://zacharyzekaichen.github.io/mrbQkv9g7/</id>
+        <link href="https://zacharyzekaichen.github.io/mrbQkv9g7/">
         </link>
-        <updated>2020-12-03T01:57:33.000Z</updated>
-        <content type="html"><![CDATA[<p><mark>方法一</mark>：迭代</p>
-<pre><code class="language-java">public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        if(l1 == null) {return (l2 == null)? null : l2;}
-        if(l2 == null) {return (l1 == null)? null : l1;}
-
-        ListNode nodeTemp1 = l1;
-        ListNode nodeTemp2 = l2;
-        //注意：头不能动！！！
-        ListNode newList = new ListNode();
-        ListNode nodeTemp = newList;
-
-        while(true) {
-            //退出while循环条件
-            if(nodeTemp1 == null || nodeTemp2 == null) {
-                nodeTemp.next = (nodeTemp1 == null)? nodeTemp2 : nodeTemp1;
-                break;
-            }
-
-            if(nodeTemp1.val == nodeTemp2.val) {
-                //相等不进行判断也是可以的，融入到下面两个里面
-                nodeTemp.next = nodeTemp1;
-                nodeTemp1 = nodeTemp1.next;
-                nodeTemp = nodeTemp.next;
-                nodeTemp.next = nodeTemp2;
-                nodeTemp2 = nodeTemp2.next;
-                nodeTemp = nodeTemp.next;
-            }else if(nodeTemp1.val &gt; nodeTemp2.val) {
-                nodeTemp.next = nodeTemp2;
-                nodeTemp2 = nodeTemp2.next;
-                nodeTemp = nodeTemp.next;
-            }else if(nodeTemp1.val &lt; nodeTemp2.val) {
-                nodeTemp.next = nodeTemp1;
-                nodeTemp1 = nodeTemp1.next;
-                nodeTemp = nodeTemp.next;
-            }
-            //需要注意的是，无论怎么样，新建链表的指针都是要往后面挪动的。
-        }
-
-        //注意不要将头节点返回
-        return newList.next;
-    }
-</code></pre>
-<p><strong>注意点：在单向链表中，头是不能动的，不然找不回来原来的链表了。</strong></p>
-<p>错误操作示范：<mark>问题原因，对值传递的理解</mark></p>
-<pre><code class="language-java">nodeTemp.next = nodeTemp1;
-nodeTemp = nodeTemp.next;
-//这个时候nodeTemp == nodeTemp1
-//接下来的操作：相当于nodeTemp1.next = nodeTemp2
-//于是，nodeTemp1后面的数据丢失
-nodeTemp.next = nodeTemp2;
-nodeTemp = nodeTemp.next;
-nodeTemp1 = nodeTemp1.next;
-nodeTemp2 = nodeTemp2.next;
-</code></pre>
-<p><mark>方法二</mark>：递归</p>
-<pre><code class="language-java">public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-    if (l1 == null) {
-        return l2;
-    } else if (l2 == null) {
-        return l1;
-    } else if (l1.val &lt; l2.val) {
-        l1.next = mergeTwoLists(l1.next, l2);
-        return l1;
-    } else {
-        l2.next = mergeTwoLists(l1, l2.next);
-        return l2;
-    }
-}
-</code></pre>
+        <updated>2020-12-17T04:39:17.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="贪心算法">贪心算法</h1>
+<h2 id="q5"><a href="https://leetcode-cn.com/problems/integer-to-roman/">Q5</a></h2>
+<h1 id="二分法">二分法</h1>
+<p>结论：有序查找中特别管用，问题是你得判断出这是一种“有序查找”问题，比如Q69平方根问题；Q29、Q50可以算作一道题，采用了二分的思想，但不算是“有序查找”问题。二分的思想简单来讲可以理解为折叠的思想，典型题目是Q50快速幂算法。</p>
+<h2 id="q29-两数相除"><a href="https://leetcode-cn.com/problems/divide-two-integers/">Q29 两数相除</a></h2>
+<h2 id="q50-powx-n"><a href="https://leetcode-cn.com/problems/powx-n/">Q50 Pow(x, n)</a></h2>
+<h2 id="q69-x-的平方根"><a href="https://leetcode-cn.com/problems/sqrtx/">Q69 x 的平方根</a></h2>
+<h1 id="int类型溢出相关问题">int类型溢出相关问题</h1>
+<h2 id="q29-两数相除-2"><a href="https://leetcode-cn.com/problems/divide-two-integers/">Q29 两数相除</a></h2>
+<h2 id="q50-powx-n-2"><a href="https://leetcode-cn.com/problems/powx-n/">Q50 Pow(x, n)</a></h2>
+<h2 id="q69-x-的平方根-2"><a href="https://leetcode-cn.com/problems/sqrtx/">Q69 x 的平方根</a></h2>
+<h1 id="快速幂算法">快速幂算法</h1>
+<h2 id="q50-powx-n-3"><a href="https://leetcode-cn.com/problems/powx-n/">Q50 Pow(x, n)</a></h2>
+<h1 id="牛顿法">牛顿法</h1>
+<h2 id="q69-x-的平方根-3"><a href="https://leetcode-cn.com/problems/sqrtx/">Q69 x 的平方根</a></h2>
 ]]></content>
     </entry>
     <entry>
