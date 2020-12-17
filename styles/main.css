@@ -996,6 +996,10 @@ td {
         font-family: Georgia, serif;
       }
     
+      .toc-container {
+        display: none;
+      }
+    
       .main {
         background: #f8f0fc;
       }
