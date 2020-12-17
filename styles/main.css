@@ -974,3 +974,33 @@ td {
 .hljs-strong {
   font-weight: bold;
 }
+
+      .post-detail .post .post-content p {
+        font-size: 14px;
+      }
+    
+      .post-container .post .post-title {
+        text-align: center;
+      }
+      .post-container .post .post-info {
+        text-align: center;
+      }
+      .post-detail .post .post-title {
+        text-align: center;
+      }
+      .post-detail .post .post-info {
+        text-align: center;
+      }
+    
+      body {
+        font-family: Georgia, serif;
+      }
+    
+      .main {
+        background: #f8f0fc;
+      }
+    
+      body {
+        background: #e3fafc;
+      }
+    
