@@ -996,15 +996,11 @@ td {
         font-family: Georgia, serif;
       }
     
-      .toc-container {
-        display: none;
-      }
-    
       .main {
-        background: #f8f0fc;
+        background: #f3d9fa;
       }
     
       body {
-        background: #e3fafc;
+        background: #d0ebff;
       }
     
