@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zacharyzekaichen.github.io</id>
     <title>Zachary&apos;s Home</title>
-    <updated>2020-12-19T09:15:48.129Z</updated>
+    <updated>2020-12-20T03:12:10.522Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zacharyzekaichen.github.io"/>
     <link rel="self" href="https://zacharyzekaichen.github.io/atom.xml"/>
@@ -16,27 +16,50 @@
         <link href="https://zacharyzekaichen.github.io/mrbQkv9g7/">
         </link>
         <updated>2020-12-17T04:39:17.000Z</updated>
-        <content type="html"><![CDATA[<!-- more -->
+        <content type="html"><![CDATA[<hr>
+<h3 id="数组">数组</h3>
+<p><a href="https://leetcode-cn.com/problems/maximum-subarray/">Q53 最大子序和</a></p>
+<p><a href="https://leetcode-cn.com/problems/rotate-image/">Q48. 旋转图像</a></p>
+<p><a href="https://leetcode-cn.com/problems/spiral-matrix/">Q54. 螺旋矩阵</a></p>
 <hr>
-<h3 id="贪心算法"><strong>贪心算法</strong></h3>
+<h3 id="贪心算法">贪心算法</h3>
 <p><a href="https://leetcode-cn.com/problems/integer-to-roman/">Q5</a></p>
+<h4 id="q55-跳跃游戏">Q55. 跳跃游戏</h4>
+<p><a href="https://leetcode-cn.com/problems/jump-game/">LeetCode链接</a></p>
+<p>给定一个<strong>非负整数</strong>数组，你最初位于数组的第一个位置。<br>
+数组中的每个元素代表你在该位置可以跳跃的最大长度。<br>
+判断你是否能够到达最后一个位置。</p>
+<p>示例 1:<br>
+输入: [2,3,1,1,4]<br>
+输出: true<br>
+解释: 我们可以先跳 1 步，从位置 0 到达 位置 1, 然后再从位置 1 跳 3 步到达最后一个位置。</p>
+<p>示例 2:<br>
+输入: [3,2,1,0,4]<br>
+输出: false<br>
+解释: 无论怎样，你总会到达索引为 3 的位置。但该位置的最大跳跃长度是 0 ， 所以你永远不可能到达最后一个位置。</p>
 <hr>
-<h3 id="二分法"><strong>二分法</strong></h3>
+<h3 id="二分法">二分法</h3>
 <p>结论：有序查找中特别管用，问题是你得判断出这是一种“有序查找”问题，比如Q69平方根问题；Q29、Q50可以算作一道题，采用了二分的思想，但不算是“有序查找”问题。二分的思想简单来讲可以理解为折叠的思想，典型题目是Q50快速幂算法。</p>
 <p><a href="https://leetcode-cn.com/problems/divide-two-integers/">Q29 两数相除</a></p>
 <p><a href="https://leetcode-cn.com/problems/powx-n/">Q50 Pow(x, n)</a></p>
 <p><a href="https://leetcode-cn.com/problems/sqrtx/">Q69 x 的平方根</a></p>
 <hr>
-<h3 id="int类型溢出相关问题"><strong>int类型溢出相关问题</strong></h3>
+<h3 id="int类型溢出相关问题">int类型溢出相关问题</h3>
 <p><a href="https://leetcode-cn.com/problems/divide-two-integers/">Q29 两数相除</a></p>
 <p><a href="https://leetcode-cn.com/problems/powx-n/">Q50 Pow(x, n)</a></p>
 <p><a href="https://leetcode-cn.com/problems/sqrtx/">Q69 x 的平方根</a></p>
 <hr>
-<h3 id="快速幂算法"><strong>快速幂算法</strong></h3>
+<h3 id="快速幂算法">快速幂算法</h3>
 <p><a href="https://leetcode-cn.com/problems/powx-n/">Q50 Pow(x, n)</a></p>
 <hr>
-<h3 id="牛顿法"><strong>牛顿法</strong></h3>
+<h3 id="牛顿法">牛顿法</h3>
 <p><a href="https://leetcode-cn.com/problems/sqrtx/">Q69 x 的平方根</a></p>
+<hr>
+<h3 id="动态规划">动态规划</h3>
+<p><a href="https://leetcode-cn.com/problems/maximum-subarray/">Q53 最大子序和</a></p>
+<hr>
+<h3 id="分治">分治</h3>
+<p><a href="https://leetcode-cn.com/problems/maximum-subarray/">Q53 最大子序和</a></p>
 ]]></content>
     </entry>
     <entry>
